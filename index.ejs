@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Manager</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>📚 Book Manager</h1>
+
+    <form action="/books" method="POST">
+      <input type="text" name="title" placeholder="Title" required>
+      <input type="text" name="author" placeholder="Author" required>
+      <button type="submit">Add Book</button>
+    </form>
+
+    <div class="book-list">
+      <% if (books.length === 0) { %>
+        <p>No books yet. Add one!</p>
+      <% } else { %>
+        <% books.forEach(book => { %>
+          <div class="book">
+            <span><strong><%= book.title %></strong> by <%= book.author %></span>
+            <form action="/books/delete/<%= book.id %>" method="POST" style="display:inline;">
+              <button type="submit">Delete</button>
+            </form>
+          </div>
+        <% }) %>
+      <% } %>
+    </div>
+  </div>
+</body>
+</html>
